@@ -6,6 +6,7 @@ import { AuthState } from '@/shared/types';
 
 export const useAuthStore = create<AuthState>(set => ({
   user: null,
+  isAuthenticated: false,
   login: async authCredentials => {
     console.log(authCredentials, 'АВТОРИЗАЦИЯ');
     try {
@@ -21,11 +22,11 @@ export const useAuthStore = create<AuthState>(set => ({
           withCredentials: true
         }
       );
-      set({ user: response.data });
+      set({ user: response.data, isAuthenticated: true });
       console.log(response.data, 'ЛОГИН');
     } catch (error) {
       console.log(error, 'Ошибка авторизации в useAuthStore');
     }
   },
-  logout: () => set({ user: null })
+  logout: () => set({ user: null, isAuthenticated: false })
 }));
