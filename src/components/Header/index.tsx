@@ -3,19 +3,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import styles from './Header.module.scss';
-import { useAuthStore } from '@/store/auth';
-import { shallow } from 'zustand/shallow';
+import styles from './index.module.scss';
+import { useIsAuthenticated, useLogout, useUser } from '@/store/auth';
 
 const Header = () => {
-  const { isAuthenticated, user, logout } = useAuthStore(
-    state => ({
-      isAuthenticated: state.isAuthenticated,
-      user: state.user,
-      logout: state.logout
-    }),
-    shallow
-  );
+  const isAuthenticated = useIsAuthenticated();
+  const user = useUser();
+  const logout = useLogout();
 
   const router = useRouter();
 
@@ -26,18 +20,21 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
+      <div className={styles.logo}>Logo</div>
       {!isAuthenticated ? (
-        <Link className={styles.loginBtn} href='/login'>
+        <Link className={styles.login} href='/login'>
           Login
         </Link>
       ) : (
-        <div>
+        <div className={styles.logoutWrapper}>
           {user && (
-            <span>
+            <span className={styles.userName}>
               {user?.firstName} {user?.lastName}
             </span>
           )}
-          <button onClick={handleLogout}>Logout</button>
+          <button className={styles.logout} onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       )}
     </header>

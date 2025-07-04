@@ -4,11 +4,11 @@ import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import styles from './Auth.module.scss';
-import { useAuthStore } from '@/store/auth';
+import styles from './index.module.scss';
+import { useLogin } from '@/store/auth';
 
 const Auth = () => {
-  const login = useAuthStore(state => state.login);
+  const login = useLogin();
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +20,13 @@ const Auth = () => {
       return;
     }
     try {
+      console.log(
+        {
+          username,
+          password
+        },
+        'Данные для авторизации'
+      );
       login({
         username,
         password
@@ -32,8 +39,7 @@ const Auth = () => {
   };
 
   return (
-    <div>
-      <h1 className={styles.title}>Login</h1>
+    <div className={styles.wrapper}>
       <div className={styles.container}>
         <input
           className={styles.loginInput}

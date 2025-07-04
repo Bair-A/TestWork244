@@ -4,11 +4,10 @@ import { create } from 'zustand/react';
 
 import { AuthState } from '@/shared/types';
 
-export const useAuthStore = create<AuthState>(set => ({
+const useAuthStore = create<AuthState>(set => ({
   user: null,
   isAuthenticated: false,
   login: async authCredentials => {
-    console.log(authCredentials, 'АВТОРИЗАЦИЯ');
     try {
       const response = await axios.post(
         AUTH_PATH,
@@ -23,10 +22,18 @@ export const useAuthStore = create<AuthState>(set => ({
         }
       );
       set({ user: response.data, isAuthenticated: true });
-      console.log(response.data, 'ЛОГИН');
     } catch (error) {
       console.log(error, 'Ошибка авторизации в useAuthStore');
     }
   },
   logout: () => set({ user: null, isAuthenticated: false })
 }));
+
+export const useIsAuthenticated = () =>
+  useAuthStore(state => state.isAuthenticated);
+
+export const useUser = () => useAuthStore(state => state.user);
+
+export const useLogin = () => useAuthStore(state => state.login);
+
+export const useLogout = () => useAuthStore(state => state.logout);

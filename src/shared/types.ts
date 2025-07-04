@@ -17,6 +17,6 @@ export interface User {
 export interface AuthState {
   isAuthenticated: boolean;
   user: User | null;
-  login: (authCredentials: AuthCredentials) => void;
+  login: (authCredentials: AuthCredentials) => Promise<void>;
   logout: () => void;
 }
