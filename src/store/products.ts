@@ -20,8 +20,6 @@ const useProductsStore = create<ProductsState>()(
             headers
           });
 
-          console.log(response, 'ПРОДУКТЫ');
-
           set({ products: response.data.products, isLoading: false });
         } catch (error) {
           set({
