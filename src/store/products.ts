@@ -44,3 +44,5 @@ const useProductsStore = create<ProductsState>()(
 export const useProducts = () => useProductsStore(state => state.fetchProducts);
 
 export const useIsLoading = () => useProductsStore(state => state.isLoading);
+
+export const useProductsList = () => useProductsStore(state => state.products);
