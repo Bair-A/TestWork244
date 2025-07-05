@@ -1,5 +1,5 @@
 import { AUTH_PATH } from '@/constants';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { persist } from 'zustand/middleware';
 import { create } from 'zustand/react';
 
@@ -51,11 +51,16 @@ const useAuthStore = create<AuthState>()(
             }
           );
           set({ user: response.data, isAuthenticated: true });
-        } catch (error) {
-          const err = error as AxiosError<any>;
-          const message =
-            err?.response?.data?.message || err?.message || 'Unknown error';
-          await get().setError(message);
+        } catch (error: unknown) {
+          if (axios.isAxiosError(error)) {
+            const message =
+              error?.response?.data?.message ||
+              error?.message ||
+              'Unknown error';
+            await get().setError(message);
+          } else {
+            await get().setError('Unexpected error');
+          }
         }
       },
       logout: () => set({ user: null, isAuthenticated: false })
