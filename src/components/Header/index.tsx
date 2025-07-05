@@ -23,11 +23,7 @@ const Header = () => {
       <Link className={styles.logo} href='/'>
         Logo
       </Link>
-      {!isAuthenticated ? (
-        <Link className={styles.login} href='/login'>
-          Login
-        </Link>
-      ) : (
+      {isAuthenticated ? (
         <div className={styles.logoutWrapper}>
           {user && (
             <span className={styles.userName}>
@@ -38,6 +34,10 @@ const Header = () => {
             Logout
           </button>
         </div>
+      ) : (
+        <Link className={styles.login} href='/login'>
+          Login
+        </Link>
       )}
     </header>
   );
