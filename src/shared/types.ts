@@ -15,6 +15,10 @@ export interface User {
 }
 
 export interface AuthState {
+  isError: boolean;
+  errorMessage: string;
+  setError: (message: string) => Promise<void>;
+  clearError: () => void;
   isAuthenticated: boolean;
   user: User | null;
   login: (authCredentials: AuthCredentials) => Promise<void>;

@@ -1,62 +1,73 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
 import styles from './index.module.scss';
-import { useLogin } from '@/store/auth';
+import ErrorToast from '@/components/ErrorToast';
+import {
+  useAuthErrorMessage,
+  useClearError,
+  useIsAuthError,
+  useIsAuthenticated,
+  useLogin,
+  useLogout
+} from '@/store/auth';
 
 const Auth = () => {
-  const login = useLogin();
-  const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+
+  const login = useLogin();
+  const router = useRouter();
+  const errorMessage = useAuthErrorMessage();
+  const isError = useIsAuthError();
+  const clearError = useClearError();
+  const isAuthenticated = useIsAuthenticated();
+  const logout = useLogout();
 
   const handleLogin = async () => {
-    if (username.length < 3 || password.length < 3) {
-      setError('Минимум 3 символа в каждом поле');
-      return;
-    }
-    try {
-      console.log(
-        {
-          username,
-          password
-        },
-        'Данные для авторизации'
-      );
-      login({
-        username,
-        password
-      });
-      router.push('/');
-    } catch (err) {
-      console.log(err, 'Ошибка авторизации');
-      setError('Неверные данные для входа');
-    }
+    await login({ username, password });
   };
+
+  useEffect(() => {
+    if (isError) setTimeout(clearError, 3500);
+  }, [clearError, isError]);
+
+  useEffect(() => {
+    if (isAuthenticated) router.push('/');
+  }, [isAuthenticated, router]);
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.container}>
-        <input
-          className={styles.loginInput}
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
-        <input
-          className={styles.passwordInput}
-          type='password'
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        <button className={styles.loginButton} onClick={handleLogin}>
-          Login
+      {!isAuthenticated ? (
+        <div className={styles.container}>
+          <input
+            className={styles.loginInput}
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
+          <input
+            className={styles.passwordInput}
+            type='password'
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+          <button className={styles.loginButton} onClick={handleLogin}>
+            Login
+          </button>
+        </div>
+      ) : (
+        <button className={styles.logoutButton} onClick={logout}>
+          Logout
         </button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </div>
+      )}
+      <ErrorToast
+        message={errorMessage}
+        onClose={clearError}
+        visible={isError}
+      />
     </div>
   );
 };
