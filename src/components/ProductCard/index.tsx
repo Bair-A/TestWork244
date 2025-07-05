@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 
 import styles from './index.module.scss';
 import FallBackImageIcon from '@/assets/icons/FallBackImageIcon';
+import { useIsAuthenticated } from '@/store/auth';
 import { formatPrice } from '@/utils';
 
 import { Product } from '@/shared/types';
@@ -13,6 +14,7 @@ type ProductCardProps = {
 };
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const isAuthenticated = useIsAuthenticated();
   const { title, category, price, discountPercentage, rating, images, brand } =
     product;
 
@@ -31,14 +33,16 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
       <div className={styles.content}>
         <h3 className={styles.title}>{title}</h3>
-        <p className={styles.category}>{category}</p>
-        <p className={styles.brand}>Бренд: {brand}</p>
+        <p className={styles.category}>Category: {category}</p>
+        <p className={styles.brand}>Brand: {brand}</p>
         <div className={styles.priceWrapper}>
-          <span className={styles.finalPrice}>${priceFormatted}</span>
-          <span className={styles.oldPrice}>${price.toFixed(2)}</span>
-          <span className={styles.discount}>-{discountPercentage}%</span>
+          <span className={styles.finalPrice}>{priceFormatted}</span>
+          <span className={styles.discount}> - {discountPercentage}%</span>
         </div>
-        <p className={styles.rating}>⭐ {rating}/5</p>
+        <p className={styles.rating}>⭐ {rating} / 5</p>
+        {isAuthenticated && (
+          <button className={styles.addToCart}>add to cart</button>
+        )}
       </div>
     </div>
   );
