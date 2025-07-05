@@ -20,7 +20,9 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>Logo</div>
+      <Link className={styles.logo} href='/'>
+        Logo
+      </Link>
       {!isAuthenticated ? (
         <Link className={styles.login} href='/login'>
           Login
