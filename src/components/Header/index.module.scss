@@ -30,8 +30,7 @@
   cursor: default;
 }
 
-.login,
-.logout {
+.login {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   background-color: var(--color-primary);
@@ -50,5 +49,27 @@
 
   &:active {
     background-color: var(--color-primary-active);
+  }
+}
+
+.logout {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-danger);
+  color: var(--color-primary-text);
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-danger-hover);
+  }
+
+  &:active {
+    background-color: var(--color-danger-active);
   }
 }
