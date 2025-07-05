@@ -26,7 +26,7 @@
   transition: border-color 0.3s ease;
 
   &:focus {
-    border-color: #0070f3;
+    border-color: (--color-primary);
   }
 }
 
@@ -34,8 +34,8 @@
   width: 100%;
   max-width: 300px;
   padding: 0.75rem;
-  background-color: #0070f3;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-primary-text);
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -44,15 +44,15 @@
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #005bb5;
+    background-color: var(--color-primary-hover);
   }
 
   &:active {
-    background-color: #003f7f;
+    background-color: var(--color-primary-active);
   }
 
   &:disabled {
-    background-color: #ccc;
+    background-color: var(--color-disabled);
     cursor: not-allowed;
   }
 }
@@ -61,7 +61,7 @@
   width: 100%;
   max-width: 300px;
   padding: 0.75rem;
-  background-color: #d9534f;
+  background-color: var(--color-danger);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -71,15 +71,15 @@
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #b00000;
+    background-color: var(--color-danger-hover);
   }
 
   &:active {
-    background-color: #7a0000;
+    background-color: var(--color-danger-active);
   }
 
   &:disabled {
-    background-color: #ccc;
+    background-color: var(--color-disabled);
     cursor: not-allowed;
   }
 }

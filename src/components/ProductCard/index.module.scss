@@ -88,15 +88,15 @@
 .price {
   font-size: 1.25rem;
   font-weight: bold;
-  color: #6366f1;
+  color: var(--color-primary);
 }
 
 .addToCart {
   margin-top: 1rem;
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background-color: #22c55e; // зелёный (Tailwind: green-500)
-  color: #fff;
+  background-color: var(--color-second-pimary);
+  color: var(--color-primary-text);
   text-decoration: none;
   border: none;
   border-radius: 4px;
@@ -107,15 +107,15 @@
   cursor: pointer;
 
   &:hover {
-    background-color: #16a34a; // green-600
+    background-color: var(--color-second-pimary-hover);
   }
 
   &:active {
-    background-color: #15803d; // green-700
+    background-color: var(--color-second-pimary-active);
   }
 
   &:disabled {
-    background-color: #9ca3af; // gray-400
+    background-color: var(--color-disabled);
     cursor: not-allowed;
   }
 }

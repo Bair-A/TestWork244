@@ -1,6 +1,22 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --color-primary: #0070f3;
+  --color-primary-hover: #005bb5;
+  --color-primary-active: #003f7f;
+
+  --color-second-pimary: #22c55e;
+  --color-second-pimary-hover: #16a34a;
+  --color-second-pimary-active: #15803d;
+
+  --color-primary-text: #fff;
+
+  --color-disabled: #ccc;
+
+  --color-danger: #d9534f;
+  --color-danger-hover: #b00000;
+  --color-danger-active: #7a0000;
 }
 
 @media (prefers-color-scheme: dark) {

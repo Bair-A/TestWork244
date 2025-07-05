@@ -5,7 +5,7 @@
   min-width: 280px;
   max-width: 320px;
   background-color: #fff1f0;
-  color: #cf1322;
+  color: var(--color-danger);
   border: 1px solid #ffa39e;
   box-shadow: 0 4px 12px rgba(207, 19, 34, 0.2);
   border-radius: 6px;
@@ -51,7 +51,7 @@
 .closeBtn {
   background: transparent;
   border: none;
-  color: #cf1322;
+  color: var(--color-danger);
   font-size: 1.25rem;
   font-weight: bold;
   cursor: pointer;
@@ -62,6 +62,6 @@
   transition: color 0.2s ease;
 
   &:hover {
-    color: #a8071a;
+    color: var(--color-danger-hover);
   }
 }
